@@ -1,3 +1,3 @@
 export default function Coins() {
-  return <div>coins</div>;
+  return <div>Coins</div>;
 }
