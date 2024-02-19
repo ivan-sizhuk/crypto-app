@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Link from "next/link";
+import Navbar from "@/components/navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,42 +18,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* <div style={{ height: "100px", background: "red" }}>
-          <Link href="/coins">Coins</Link>
-          <Link href="/converter">Converter</Link>
-          <Link href="/portfolio">Portfolio</Link>
-        </div> */}
-        <nav className="bg-gray-800 p-4">
-          <div className="flex items-center justify-between max-w-7xl mx-auto">
-            {/* Logo */}
-            <div>
-              <img className="h-14" src="https://img.icons8.com/dotty/80/exchange-money-ethereum.png" alt="Logo" />
-            </div>
-
-            {/* Links */}
-            <div className="hidden md:flex space-x-4">
-              <Link legacyBehavior href="/coins">
-                <a className="text-white hover:text-gray-200">Coins</a>
-              </Link>
-              <Link legacyBehavior href="/exchange">
-                <a className="text-white hover:text-gray-200">Exchange</a>
-              </Link>
-              <Link legacyBehavior href="/portfolio">
-                <a className="text-white hover:text-gray-200">Portfolio</a>
-              </Link>
-            </div>
-
-            {/* Search Input */}
-            <div className="flex-1 md:ml-4">
-              <input
-                type="text"
-                placeholder="Search..."
-                className="w-full px-4 py-2 bg-gray-700 text-white rounded-md focus:outline-none"
-              />
-            </div>
-          </div>
-        </nav>
-        {children}
+        <div className="bg-slate-950 pt-24 pb-8">
+          <Navbar />
+          {children}
+        </div>
       </body>
     </html>
   );
