@@ -1,7 +1,18 @@
 import { useCoinData } from "../utilities/fetchCoinList";
 
-const CoinList = () => {
-  const cryptoData = useCoinData();
+interface CryptoData {
+  name: string;
+  current_price: number;
+  price_change_percentage_1h_in_currency: number;
+  price_change_percentage_24h_in_currency: number;
+  price_change_percentage_7d_in_currency: number;
+  total_volume: number;
+  circulating_supply: number;
+  total_supply: number;
+}
+
+const CoinList: React.FC = () => {
+  const cryptoData: CryptoData[] = useCoinData();
 
   return (
     <div className="mt-4">
