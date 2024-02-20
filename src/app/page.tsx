@@ -1,6 +1,8 @@
-import Carousel from "@/components/carousel";
+"use client";
+import Carousel from "./components/carousele";
+import CoinList from "@/app/components/coinList";
 
-export default function Home() {
+const Home = () => {
   return (
     <div className="px-14">
       <Carousel />
@@ -24,24 +26,9 @@ export default function Home() {
         <span className="ml-2">Circulation/Total Supply</span>
         <span className="ml-2">7d Change</span>
       </div>
-      <div className="mt-4">
-        {[...Array(10)].map((_, index) => (
-          <div
-            key={index}
-            className="my-1 h-16 bg-indigo-950 hover:bg-indigo-900 transition duration-200 ease-in-out text-white flex items-center justify-between rounded-xl cursor-pointer"
-          >
-            <span>#</span>
-            <span className="ml-2 ">Name</span>
-            <span className="ml-2">Price</span>
-            <span className="ml-2">1h</span>
-            <span className="ml-2">24h</span>
-            <span className="ml-2">7d</span>
-            <span className="ml-2">24h Vol/Market Cap</span>
-            <span className="ml-2">Circulation/Total Supply</span>
-            <span className="ml-2">7d Change</span>
-          </div>
-        ))}
-      </div>
+      <CoinList />
     </div>
   );
-}
+};
+
+export default Home;
