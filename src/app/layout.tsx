@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/app/components/navbar";
-import { CoinDataProvider } from "./utilities/fetchCoinList";
+import StoreProvider from "./StoreProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <CoinDataProvider>
+    <StoreProvider>
       <html lang="en">
         <body className={inter.className}>
           <div className="bg-slate-950 pt-24 pb-8">
@@ -26,6 +26,6 @@ export default function RootLayout({
           </div>
         </body>
       </html>
-    </CoinDataProvider>
+    </StoreProvider>
   );
 }
