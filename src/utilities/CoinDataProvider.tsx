@@ -1,19 +1,24 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useAppDispatch } from "../lib/hooks";
 import { fetchCoinData } from "../lib/slices/coinDataSlice";
+import PropTypes from "prop-types";
 
 interface CoinDataProviderProps {
   children: React.ReactNode;
 }
 
 const CoinDataProvider: React.FC<CoinDataProviderProps> = ({ children }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchCoinData());
+    dispatch(fetchCoinData() as any);
   }, [dispatch]);
 
   return <>{children}</>;
+};
+
+CoinDataProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default CoinDataProvider;

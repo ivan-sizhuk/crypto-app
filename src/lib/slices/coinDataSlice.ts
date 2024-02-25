@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 interface CoinData {
+  id: string;
   name: string;
   current_price: number;
   price_change_percentage_1h_in_currency: number;
@@ -12,16 +13,20 @@ interface CoinData {
   market_cap_rank: number;
 }
 
-export const fetchCoinData = createAsyncThunk<CoinData[]>("coinData/fetchCoinData", async () => {
-  const response = await fetch(
-    "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d"
-  );
+export const fetchCoinData = createAsyncThunk<CoinData[], void, {}>("coinData/fetchCoinData", async (_, thunkAPI) => {
+  try {
+    const response = await fetch(
+      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d"
+    );
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch data");
+    if (!response.ok) {
+      throw new Error("Failed to fetch data");
+    }
+
+    return response.json();
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error instanceof Error ? error.message : "An error occurred");
   }
-
-  return response.json();
 });
 
 interface CoinDataState {

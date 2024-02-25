@@ -1,27 +1,23 @@
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../lib/store";
+import { useAppDispatch, useAppSelector } from "../../lib/hooks";
 import { fetchCoinData } from "../../lib/slices/coinDataSlice";
 
 const CoinList: React.FC = () => {
-  const dispatch = useDispatch();
-  const cryptoData = useSelector((state: RootState) => state.coinData.cryptoData);
-  const loading = useSelector((state: RootState) => state.coinData.loading);
-  const error = useSelector((state: RootState) => state.coinData.error);
+  const dispatch = useAppDispatch();
+  const { cryptoData, loading, error } = useAppSelector((state) => state.coinData);
 
   useEffect(() => {
-    dispatch(fetchCoinData());
+    dispatch(fetchCoinData() as any);
   }, [dispatch]);
 
-  if (loading || cryptoData.length === 0) {
+  if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (error) {
+  if (error || cryptoData.length === 0) {
     return <div>Error: {error}</div>;
   }
 
-  console.log(cryptoData);
   return (
     <div className="mt-4">
       {cryptoData.map((crypto) => (
