@@ -20,7 +20,7 @@ export default function RootLayout({
     <StoreProvider>
       <html lang="en">
         <body className={inter.className}>
-          <div className="bg-slate-950 pt-24 pb-8">
+          <div className="bg-background-dark pt-24 pb-8 min-h-screen h-full">
             <Navbar />
             {children}
           </div>
