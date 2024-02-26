@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 interface CoinData {
   id: string;
+  image: string;
   name: string;
   current_price: number;
   price_change_percentage_1h_in_currency: number;

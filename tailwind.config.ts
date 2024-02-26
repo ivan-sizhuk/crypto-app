@@ -8,13 +8,29 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      colors: {
+        "background-dark": "#191a1f",
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addComponents }: any) {
+      addComponents({
+        ".container": {
+          backgroundColor: "#2b3139", // bg-indigo-950
+          "&:hover": {
+            backgroundColor: "#5E6673", // hover:bg-indigo-900
+          },
+          transition: "background-color 0.2s ease-in-out",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          borderRadius: "1rem",
+          cursor: "pointer",
+        },
+      });
+    },
+  ],
 };
+
 export default config;

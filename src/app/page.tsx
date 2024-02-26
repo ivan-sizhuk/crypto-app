@@ -4,13 +4,13 @@ import CoinList from "@/app/components/coinList";
 
 const Home = () => {
   return (
-    <div className="px-14">
+    <div className="px-8">
       <Carousel />
       <div className="flex mt-12">
-        <div className="w-1/2 h-72 mr-4 bg-indigo-950 hover:bg-indigo-900 transition duration-200 ease-in-out flex items-center justify-center rounded-2xl cursor-pointer">
+        <div className="container w-1/2 h-72 mr-4">
           <div className="text-center">Chart 1</div>
         </div>
-        <div className="w-1/2 h-72 ml-4 bg-indigo-950 hover:bg-indigo-900 transition duration-200 ease-in-out flex items-center justify-center rounded-2xl cursor-pointer">
+        <div className="container w-1/2 h-72 ml-4">
           <div className="text-center">Chart 2</div>
         </div>
       </div>
