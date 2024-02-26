@@ -9,12 +9,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "background-dark": "#191a1f", // Your custom background color
+        "background-dark": "#191a1f",
       },
     },
   },
   plugins: [
-    function ({ addComponents }) {
+    function ({ addComponents }: any) {
       addComponents({
         ".container": {
           backgroundColor: "#2b3139", // bg-indigo-950
