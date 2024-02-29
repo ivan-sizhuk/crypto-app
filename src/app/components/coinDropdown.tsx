@@ -44,7 +44,7 @@ const CoinDropdown: React.FC = () => {
         clearTimeout(searchTimeout.current);
       }
     };
-  }, [searchTerm]);
+  }, [searchTerm, cryptoData]);
 
   if (error) {
     return <div>Error: {error}</div>;
