@@ -21,7 +21,10 @@ const CoinList: React.FC = () => {
   return (
     <div className="mt-4">
       {cryptoData.map((crypto) => (
-        <div key={crypto.id} className="container my-1 h-16 flex items-center justify-between cursor-pointer">
+        <div
+          key={crypto.id}
+          className="container min-w-full my-1 h-16 flex items-center justify-between cursor-pointer"
+        >
           <span>{crypto.market_cap_rank}</span>
           <img className="w-8 h-8" src={crypto.image} alt={crypto.name} />
           <span className="ml-2">{crypto.name}</span>

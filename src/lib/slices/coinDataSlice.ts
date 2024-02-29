@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-interface CoinData {
+export interface CoinData {
   id: string;
+  symbol: string;
   image: string;
   name: string;
   current_price: number;
