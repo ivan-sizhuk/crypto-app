@@ -4,6 +4,7 @@ export interface CoinData {
   id: string;
   symbol: string;
   image: string;
+  thumb: string;
   name: string;
   current_price: number;
   price_change_percentage_1h_in_currency: number;
