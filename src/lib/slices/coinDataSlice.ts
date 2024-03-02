@@ -10,13 +10,13 @@ export interface CoinData {
   price_change_percentage_1h_in_currency: number;
   price_change_percentage_24h_in_currency: number;
   price_change_percentage_7d_in_currency: number;
-  total_volume: number;
-  circulating_supply: string;
-  total_supply: string;
-  market_cap_rank: number;
-  market_cap: number;
+  total_volume: any;
+  circulating_supply: any;
+  total_supply: any;
+  market_cap_rank: any;
+  market_cap: any;
 }
-const formatNumber = (num: string | number) => {
+const formatNumber = (num: any) => {
   const parsedNum = typeof num === "string" ? parseFloat(num) : num;
 
   if (!isNaN(parsedNum)) {
