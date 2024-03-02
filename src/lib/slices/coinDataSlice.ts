@@ -10,23 +10,27 @@ export interface CoinData {
   price_change_percentage_1h_in_currency: number;
   price_change_percentage_24h_in_currency: number;
   price_change_percentage_7d_in_currency: number;
-  total_volume: number;
+  total_volume: string;
   circulating_supply: string;
   total_supply: string;
   market_cap_rank: number;
   market_cap: number;
 }
-const formatNumber = (num: number) => {
-  if (num >= 1e9) {
-    return `${(num / 1e9).toFixed(1)}B`;
-  } else if (num >= 1e6) {
-    return `${(num / 1e6).toFixed(1)}M`;
-  } else if (num >= 1e3) {
-    return `${(num / 1e3).toFixed(1)}K`;
-  } else if (num >= 1 && num < 1e3) {
-    return `${num}`;
+const formatNumber = (num: string | number) => {
+  const parsedNum = typeof num === "string" ? parseFloat(num) : num;
+
+  if (!isNaN(parsedNum)) {
+    if (parsedNum >= 1e9) {
+      return `${(parsedNum / 1e9).toFixed(1)}B`;
+    } else if (parsedNum >= 1e6) {
+      return `${(parsedNum / 1e6).toFixed(1)}M`;
+    } else if (parsedNum >= 1e3) {
+      return `${(parsedNum / 1e3).toFixed(1)}K`;
+    } else {
+      return `${parsedNum}`;
+    }
   } else {
-    return `${num}`;
+    return "Invalid number";
   }
 };
 
@@ -44,7 +48,7 @@ export const fetchCoinData = createAsyncThunk<CoinData[], void, {}>("coinData/fe
     const updatedData = data.map((coin) => ({
       ...coin,
       market_cap: formatNumber(coin.market_cap),
-      total_volume: formatNumber(coin.total_volume),
+      total_volume: parseFloat(coin.total_volume), // Parse total_volume as a number
       circulating_supply: formatNumber(parseFloat(coin.circulating_supply)),
       total_supply: formatNumber(parseFloat(coin.total_supply)),
     }));
