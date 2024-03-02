@@ -48,7 +48,7 @@ export const fetchCoinData = createAsyncThunk<CoinData[], void>("coinData/fetchC
     const updatedData = data.map((coin) => ({
       ...coin,
       market_cap: formatNumber(coin.market_cap),
-      total_volume: parseFloat(coin.total_volume), // Parse total_volume as a number
+      total_volume: parseFloat(coin.total_volume),
       circulating_supply: formatNumber(parseFloat(coin.circulating_supply)),
       total_supply: formatNumber(parseFloat(coin.total_supply)),
     }));

@@ -14,19 +14,6 @@ const Home = () => {
           <div className="text-center">Chart 2</div>
         </div>
       </div>
-      <div className="mt-12 flex justify-between">
-        {" "}
-        <span>#</span>
-        <span className="ml-2 ">Name</span>
-        <span className="ml-2">Price</span>
-        <span className="ml-2">1h%</span>
-        <span className="ml-2">24h%</span>
-        <span className="ml-2">7d%</span>
-        <span className="ml-2">Market Cap</span>
-        <span className="ml-2">Volume(24h)</span>
-        <span className="ml-2">Circulation/Total Supply</span>
-        <span className="ml-2">Last 7d</span>
-      </div>
       <CoinList />
     </div>
   );
