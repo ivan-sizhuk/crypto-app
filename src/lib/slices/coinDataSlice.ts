@@ -10,23 +10,50 @@ export interface CoinData {
   price_change_percentage_1h_in_currency: number;
   price_change_percentage_24h_in_currency: number;
   price_change_percentage_7d_in_currency: number;
-  total_volume: number;
-  circulating_supply: number;
-  total_supply: number;
-  market_cap_rank: number;
+  total_volume: any;
+  circulating_supply: any;
+  total_supply: any;
+  market_cap_rank: any;
+  market_cap: any;
 }
+const formatNumber = (num: any) => {
+  const parsedNum = typeof num === "string" ? parseFloat(num) : num;
 
-export const fetchCoinData = createAsyncThunk<CoinData[], void, {}>("coinData/fetchCoinData", async (_, thunkAPI) => {
+  if (!isNaN(parsedNum)) {
+    if (parsedNum >= 1e9) {
+      return `${(parsedNum / 1e9).toFixed(1)}B`;
+    } else if (parsedNum >= 1e6) {
+      return `${(parsedNum / 1e6).toFixed(1)}M`;
+    } else if (parsedNum >= 1e3) {
+      return `${(parsedNum / 1e3).toFixed(1)}K`;
+    } else {
+      return `${parsedNum}`;
+    }
+  } else {
+    return "Invalid number";
+  }
+};
+
+export const fetchCoinData = createAsyncThunk<CoinData[], void>("coinData/fetchCoinData", async (_, thunkAPI) => {
   try {
     const response = await fetch(
-      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d"
+      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d&x_cg_demo_api_key=CG-ngyTBAk7Rz4RzH3a3JZW63Zo"
     );
 
     if (!response.ok) {
       throw new Error("Failed to fetch data");
     }
 
-    return response.json();
+    const data: CoinData[] = await response.json();
+    const updatedData = data.map((coin) => ({
+      ...coin,
+      market_cap: formatNumber(coin.market_cap),
+      total_volume: parseFloat(coin.total_volume),
+      circulating_supply: formatNumber(parseFloat(coin.circulating_supply)),
+      total_supply: formatNumber(parseFloat(coin.total_supply)),
+    }));
+
+    return updatedData;
   } catch (error) {
     return thunkAPI.rejectWithValue(error instanceof Error ? error.message : "An error occurred");
   }
@@ -37,7 +64,6 @@ interface CoinDataState {
   loading: boolean;
   error: string | null;
 }
-
 const initialState: CoinDataState = {
   cryptoData: [],
   loading: false,

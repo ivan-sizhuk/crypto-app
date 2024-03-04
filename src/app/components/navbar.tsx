@@ -4,7 +4,7 @@ export default function Navbar() {
   return (
     <nav className="px-8 flex items-center justify-between w-full py-4 fixed top-0 bg-gray-800 bg-opacity-10 backdrop-blur-md">
       {/* Logo */}
-      <div className="hidden md:flex text-4xl text-purple-600">
+      <div className="hidden md:flex text-4xl text-purple-500">
         <a href="/">{"cryptico."}</a>
       </div>
 
