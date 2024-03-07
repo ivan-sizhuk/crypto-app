@@ -2,17 +2,10 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../lib/hooks";
 import { fetchCoinData } from "../../lib/slices/coinListSlice";
 import Link from "next/link";
-import { createAction } from "@reduxjs/toolkit";
-
-export const setSelectedCoinId = createAction<string>("selectedCoin/setSelectedCoinId");
 
 const CoinList: React.FC = () => {
   const dispatch = useAppDispatch();
   const { cryptoData, loading, error } = useAppSelector((state) => state.coinData);
-  const handleCoinClick = (coinId: string) => {
-    dispatch(setSelectedCoinId(coinId));
-    console.log(coinId);
-  };
 
   useEffect(() => {
     dispatch(fetchCoinData() as any);
@@ -41,12 +34,8 @@ const CoinList: React.FC = () => {
         <span className="flex justify-end w-36 mr-6">Last 7d</span>
       </li>
       {cryptoData.map((crypto) => (
-        <Link href="/coin/[coinId]" as={`/coin/${crypto.id}`} key={crypto.id}>
-          <li
-            onClick={() => handleCoinClick(crypto.id)}
-            key={crypto.id}
-            className="container min-w-full my-1 h-16 flex items-center justify-start cursor-pointer"
-          >
+        <Link href="/[coinId]" as={`/${crypto.id}`} key={crypto.id}>
+          <li key={crypto.id} className="container min-w-full my-1 h-16 flex items-center justify-start cursor-pointer">
             <span className="ml-6 w-10">{crypto.market_cap_rank}</span>
             <span className="w-48">
               <span className="w-36 flex items-center">

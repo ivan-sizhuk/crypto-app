@@ -14,9 +14,24 @@ export interface CoinData {
   market_cap_rank: any;
   market_cap: any;
   description: {
-    en: string; // Add description.en field
+    en: string;
   };
   market_data: {
-    current_price: { usd: string };
+    current_price: { usd: number };
+    price_change_percentage_24h: number;
+    ath: { usd: number };
+    ath_date: { usd: string };
+    atl: { usd: number };
+    atl_date: { usd: string };
+    market_cap: { usd: number };
+    fully_diluted_valuation: {
+      usd: string;
+    };
+    total_volume: { usd: number };
+    circulating_supply: number;
+    max_supply: number;
+  };
+  links: {
+    homepage: string;
   };
 }

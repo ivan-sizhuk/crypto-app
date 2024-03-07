@@ -15,8 +15,29 @@ export const fetchSelectedCoinData = createAsyncThunk<CoinData, string>(
 
       const data: CoinData = await response.json();
 
+      const homepageUrl = Array.isArray(data.links.homepage) ? data.links.homepage[0] : data.links.homepage;
+      const formatTimestampToDate = (timestamp: string): string => {
+        const dateObject = new Date(timestamp);
+        return dateObject.toISOString().split("T")[0];
+      };
+
       return {
         ...data,
+        links: {
+          ...data.links,
+          homepage: homepageUrl,
+        },
+        market_data: {
+          ...data.market_data,
+          ath_date: {
+            ...data.market_data.ath_date,
+            usd: formatTimestampToDate(data.market_data.ath_date.usd),
+          },
+          atl_date: {
+            ...data.market_data.atl_date,
+            usd: formatTimestampToDate(data.market_data.atl_date.usd),
+          },
+        },
         market_cap: formatNumber(data.market_cap),
         total_volume: formatNumber(data.total_volume),
         circulating_supply: formatNumber(parseFloat(data.circulating_supply)),
@@ -33,7 +54,7 @@ interface SelectedCoinState {
   selectedCoinData: CoinData | null;
   loading: boolean;
   error: string | null;
-  loadingInitialized: boolean; // Flag to indicate if initial loading is done
+  loadingInitialized: boolean;
 }
 
 const initialState: SelectedCoinState = {
@@ -41,17 +62,16 @@ const initialState: SelectedCoinState = {
   selectedCoinData: null,
   loading: false,
   error: null,
-  loadingInitialized: false, // Initialize as false
+  loadingInitialized: false,
 };
 
-// Create slice for selected coin
 export const selectedCoinSlice = createSlice({
   name: "selectedCoin",
   initialState,
   reducers: {
     setSelectedCoinId: (state, action) => {
       state.selectedCoinId = action.payload;
-      localStorage.setItem("selectedCoinId", action.payload); // Update local storage
+      localStorage.setItem("selectedCoinId", action.payload);
     },
     setLoadingInitialized: (state, action) => {
       state.loadingInitialized = action.payload;
@@ -74,7 +94,5 @@ export const selectedCoinSlice = createSlice({
   },
 });
 
-export const { setSelectedCoinId, setLoadingInitialized } = selectedCoinSlice.actions; // Export action creators
-export const selectedCoinReducer = selectedCoinSlice.reducer; // Export reducer for selected coin ID
-export const selectedCoinDataReducer = selectedCoinSlice.reducer; // Export reducer for selected coin data
-export const loadingInitializedReducer = selectedCoinSlice.reducer;
+export const selectedCoinReducer = selectedCoinSlice.reducer;
+export const selectedCoinDataReducer = selectedCoinSlice.reducer;
