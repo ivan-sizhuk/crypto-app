@@ -1,7 +1,7 @@
 export interface CoinData {
   id: string;
   symbol: string;
-  image: { large: string };
+  image: string;
   thumb: string;
   name: string;
   current_price: number;

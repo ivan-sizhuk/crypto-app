@@ -34,6 +34,7 @@ const Coin: React.FC = () => {
       <div className="flex h-72 gap-5">
         <div className="container flex flex-col justify-around w-3/5 py-4 px-8">
           <div className="flex justify-center items-center w-24 h-24">
+            {/*  @ts-ignore */}
             <img src={selectedCoinData.image.large} alt="" />
           </div>
           <p className="text-3xl">{selectedCoinData.name}</p>

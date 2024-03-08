@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../lib/hooks";
 import { fetchCoinData } from "../../lib/slices/coinListSlice";
-import { CoinData } from "../../lib/slices/coinListSlice";
+import { CoinData } from "../../utilities/CoinDataInterface";
 
 const CoinDropdown: React.FC = () => {
   const dispatch = useAppDispatch();
