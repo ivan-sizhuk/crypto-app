@@ -10,9 +10,6 @@ export default function Navbar() {
 
       {/* Links */}
       <div className="md:flex space-x-6 pl-6 pr-3">
-        <Link legacyBehavior href="/coins">
-          <a className="text-white hover:text-gray-400 transition duration-200 ease-in-out">Coins</a>
-        </Link>
         <Link legacyBehavior href="/exchange">
           <a className="text-white hover:text-gray-400 transition duration-200 ease-in-out">Exchange</a>
         </Link>
