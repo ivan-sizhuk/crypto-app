@@ -4,7 +4,7 @@ import { fetchCoinData } from "../../lib/slices/coinListSlice";
 import Link from "next/link";
 
 const CoinList: React.FC = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch(10);
   const { cryptoData, loading, error } = useAppSelector((state) => state.coinData);
   const containerRef = useRef<HTMLUListElement>(null);
 
