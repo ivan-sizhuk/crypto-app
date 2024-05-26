@@ -19,7 +19,7 @@ export const formatNumber = (num: any) => {
   }
 };
 
-export const fetchCoinData = createAsyncThunk<CoinData[], number>(
+export const fetchCoinData = createAsyncThunk<CoinData[], number | undefined>(
   "coinData/fetchCoinData",
   async (perPage, thunkAPI) => {
     try {
