@@ -9,11 +9,10 @@ const CoinList: React.FC = () => {
   const containerRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
-    dispatch(fetchCoinData(10)); // Fetch initial 10 coins
+    dispatch(fetchCoinData(10));
   }, [dispatch]);
 
   useEffect(() => {
-    // Add event listener for scroll
     const handleScroll = () => {
       if (containerRef.current) {
         const { scrollTop, clientHeight, scrollHeight } = containerRef.current;
