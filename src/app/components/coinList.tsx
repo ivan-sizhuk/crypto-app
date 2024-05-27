@@ -27,12 +27,20 @@ const CoinList: React.FC = () => {
     }
 
     return () => {
-      const currentContainerRef = containerRef.current;
-      if (currentContainerRef) {
-        currentContainerRef.removeEventListener("scroll", handleScroll);
+      if (containerRef.current) {
+        containerRef.current.removeEventListener("scroll", handleScroll);
       }
     };
   }, [dispatch, cryptoData, loading]);
+
+  const scrollToTop = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  };
 
   if (loading && cryptoData.length === 0) {
     return <div>Loading...</div>;
@@ -43,46 +51,54 @@ const CoinList: React.FC = () => {
   }
 
   return (
-    <ul className="mt-4 overflow-y-auto" ref={containerRef} style={{ maxHeight: "calc(100vh - 100px)" }}>
-      {cryptoData.map((crypto) => (
-        <Link href="/[coinId]" as={`/${crypto.id}`} key={crypto.id}>
-          <li key={crypto.id} className="container min-w-full my-1 h-16 flex items-center justify-start cursor-pointer">
-            <span className="ml-6 w-10">{crypto.market_cap_rank}</span>
-            <span className="w-48">
-              <span className="w-36 flex items-center">
-                <img className="w-7 mr-3" src={crypto.image} alt={"img"} />
-                <span>{crypto.name}</span>
+    <div>
+      <button
+        onClick={scrollToTop}
+        className="fixed bottom-4 right-20 p-2 bg-purple-500 text-black text-xl rounded-full shadow-lg w-12 h-12 flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity duration-300"
+      >
+        ^
+      </button>
+      <ul className="mt-4 overflow-y-auto" ref={containerRef} style={{ maxHeight: "calc(100vh - 100px)" }}>
+        {cryptoData.map((crypto) => (
+          <Link href="/[coinId]" as={`/${crypto.id}`} key={crypto.id}>
+            <li className="container min-w-full my-1 h-16 flex items-center justify-start cursor-pointer">
+              <span className="ml-6 w-10">{crypto.market_cap_rank}</span>
+              <span className="w-48">
+                <span className="w-36 flex items-center">
+                  <img className="w-7 mr-3" src={crypto.image} alt={"img"} />
+                  <span>{crypto.name}</span>
+                </span>
               </span>
-            </span>
-            <span className="w-36">${crypto.current_price.toLocaleString()}</span>
-            <span className="w-28">{crypto.price_change_percentage_1h_in_currency.toFixed(1)}%</span>
-            <span className="w-28">{crypto.price_change_percentage_24h_in_currency.toFixed(1)}%</span>
-            <span className="w-32">{crypto.price_change_percentage_7d_in_currency.toFixed(1)}%</span>
-            <span className="w-32">${crypto.market_cap}</span>
-            <span className="w-40">${crypto.total_volume}</span>
-            <div className="w-52">
-              <div className="w-44">
-                <div>
-                  <span className="flex justify-between">
-                    <span className="mr-2">{crypto.circulating_supply}</span>
-                    <span className="ml-2">{crypto.total_supply}</span>
-                  </span>
+              <span className="w-36">${crypto.current_price.toLocaleString()}</span>
+              <span className="w-28">{crypto.price_change_percentage_1h_in_currency.toFixed(1)}%</span>
+              <span className="w-28">{crypto.price_change_percentage_24h_in_currency.toFixed(1)}%</span>
+              <span className="w-32">{crypto.price_change_percentage_7d_in_currency.toFixed(1)}%</span>
+              <span className="w-32">${crypto.market_cap}</span>
+              <span className="w-40">${crypto.total_volume}</span>
+              <div className="w-52">
+                <div className="w-44">
+                  <div>
+                    <span className="flex justify-between">
+                      <span className="mr-2">{crypto.circulating_supply}</span>
+                      <span className="ml-2">{crypto.total_supply}</span>
+                    </span>
+                  </div>
+                </div>
+                <div className="h-4 w-44 bg-gray-50 bg-opacity-10 backdrop-blur-md rounded-lg overflow-hidden">
+                  <div
+                    className="h-full bg-purple-500"
+                    style={{
+                      width: `${(parseFloat(crypto.circulating_supply) / parseFloat(crypto.total_supply)) * 100}%`,
+                    }}
+                  ></div>
                 </div>
               </div>
-              <div className="h-4 w-44 bg-gray-50 bg-opacity-10 backdrop-blur-md rounded-lg overflow-hidden">
-                <div
-                  className="h-full bg-purple-500"
-                  style={{
-                    width: `${(parseFloat(crypto.circulating_supply) / parseFloat(crypto.total_supply)) * 100}%`,
-                  }}
-                ></div>
-              </div>
-            </div>
-            <span className="flex justify-end w-36 mr-6">Coming Soon...</span>
-          </li>
-        </Link>
-      ))}
-    </ul>
+              <span className="flex justify-end w-36 mr-6">Coming Soon...</span>
+            </li>
+          </Link>
+        ))}
+      </ul>
+    </div>
   );
 };
 
