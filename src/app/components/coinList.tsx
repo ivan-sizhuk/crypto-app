@@ -54,14 +54,26 @@ const CoinList: React.FC = () => {
     <div>
       <button
         onClick={scrollToTop}
-        className="fixed bottom-4 right-20 p-2 bg-purple-500 text-black text-xl rounded-full shadow-lg w-12 h-12 flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity duration-300"
+        className="z-10 fixed bottom-4 right-20 p-2 bg-purple-500 text-black text-xl rounded-full shadow-lg w-12 h-12 flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity duration-300"
       >
         ^
       </button>
-      <ul className="mt-4 overflow-y-auto" ref={containerRef} style={{ maxHeight: "calc(100vh - 100px)" }}>
+      <ul className="mt-4 overflow-y-auto relative" ref={containerRef} style={{ maxHeight: "calc(100vh - 100px)" }}>
+        <li className="z-10 cursor-default text-gray-900 bg-gray-600 container min-w-full my-1 sticky top-0">
+          <span className="ml-6 w-10">#</span>
+          <span className="w-48">Name</span>
+          <span className="w-36">Price</span>
+          <span className="w-28">1h%</span>
+          <span className="w-28">24h%</span>
+          <span className="w-32">7d%</span>
+          <span className="w-32">Market Cap</span>
+          <span className="w-40">Volume(24h)</span>
+          <span className="w-52">Circulating Supply</span>
+          <span className="w-36">Last 7d</span>
+        </li>
         {cryptoData.map((crypto) => (
           <Link href="/[coinId]" as={`/${crypto.id}`} key={crypto.id}>
-            <li className="container min-w-full my-1 h-16 flex items-center justify-start cursor-pointer">
+            <li className="container min-w-full my-1 h-16">
               <span className="ml-6 w-10">{crypto.market_cap_rank}</span>
               <span className="w-48">
                 <span className="w-36 flex items-center">
