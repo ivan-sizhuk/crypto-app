@@ -15,7 +15,8 @@ const CoinSearchInput: React.FC = () => {
   }, [cryptoData, setSearchResults]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
+    const value = e.target.value;
+    setSearchTerm(value);
   };
 
   const handleFocus = () => {
@@ -24,7 +25,7 @@ const CoinSearchInput: React.FC = () => {
   };
 
   const handleBlur = () => {
-    setTimeout(() => setIsFocused(false), 100); // Small delay to allow click event on results
+    setTimeout(() => setIsFocused(false), 100);
   };
 
   if (error) {
@@ -45,12 +46,12 @@ const CoinSearchInput: React.FC = () => {
       {isFocused && searchResults.length > 0 && (
         <ul className="absolute mt-2 w-full bg-white border border-gray-300 rounded-md shadow-sm">
           {searchResults.map((coin) => (
-            <Link href="/[coinId]" as={`/${coin.id}`} key={coin.id}>
-              <li className="flex items-center py-2 px-4 cursor-pointer hover:bg-gray-100">
+            <li key={coin.id} className="flex items-center py-2 px-4 cursor-pointer hover:bg-gray-100">
+              <Link href={`/${coin.id}`} className="flex items-center w-full h-full">
                 <Image src={coin.large || coin.thumb || coin.image} alt={coin.name} width={32} height={32} />
                 <span className="ml-2 text-black">{coin.symbol.toUpperCase()}</span>
-              </li>
-            </Link>
+              </Link>
+            </li>
           ))}
         </ul>
       )}
