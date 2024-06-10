@@ -1,14 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import CoinDropdown from "../components/coinDropdown";
-
 export default function Exchange() {
+  const btcCoin = { symbol: "btc", image: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png" };
+  const ethCoin = { symbol: "eth", image: "https://assets.coingecko.com/coins/images/279/large/ethereum.png" };
+
   return (
     <div className="mx-8">
       <div className="flex items-center">
         <div className="container w-1/2 h-52 -mr-3">
           <div className="text-center">
-            <CoinDropdown />
+            <CoinDropdown defaultCoin={btcCoin} />
           </div>
         </div>
         <div className="w-12 h-12 z-10">
@@ -16,7 +18,7 @@ export default function Exchange() {
         </div>
         <div className="container w-1/2 h-52 -ml-3">
           <div className="text-center">
-            <CoinDropdown />
+            <CoinDropdown defaultCoin={ethCoin} />
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CoinSearchInput from "./CoinSearchInput"; // Adjust the import path as needed
 
 export default function Navbar() {
   return (
@@ -20,11 +21,7 @@ export default function Navbar() {
 
       {/* Search Input */}
       <div className="flex-1 md:ml-4">
-        <input
-          type="text"
-          placeholder="Search..."
-          className="w-full px-4 py-2 bg-gray-200 bg-opacity-10 backdrop-blur-md text-white rounded-md focus:outline-none transition duration-200 ease-in-out hover:bg-opacity-20"
-        />
+        <CoinSearchInput />
       </div>
     </nav>
   );

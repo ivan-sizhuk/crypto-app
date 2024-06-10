@@ -1,6 +1,7 @@
 export interface CoinData {
   id: string;
   symbol: string;
+  large: string;
   image: string;
   thumb: string;
   name: string;
