@@ -40,9 +40,6 @@ export const fetchCoinData = createAsyncThunk<CoinData[], number | undefined>(
           circulating_supply: formatNumber(parseFloat(coin.circulating_supply)),
           total_supply: formatNumber(parseFloat(coin.total_supply)),
           symbol: coin.symbol.toUpperCase(),
-          price_change_percentage_1h_in_currency: coin.price_change_percentage_1h_in_currency.toFixed(1),
-          price_change_percentage_24h_in_currency: coin.price_change_percentage_24h_in_currency.toFixed(1),
-          price_change_percentage_7d_in_currency: coin.price_change_percentage_7d_in_currency.toFixed(1),
         };
       });
 

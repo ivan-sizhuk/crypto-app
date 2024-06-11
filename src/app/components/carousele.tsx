@@ -58,7 +58,7 @@ const Carousel: React.FC = () => {
                       : "text-red-500 !important"
                   }`}
                 >
-                  {crypto.price_change_percentage_1h_in_currency}%
+                  {crypto.price_change_percentage_1h_in_currency.toFixed(1)}%
                 </span>
               </div>
             </div>
