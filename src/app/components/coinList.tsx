@@ -55,7 +55,7 @@ const CoinList: React.FC = () => {
     <div>
       <button
         onClick={scrollToTop}
-        className="z-10 fixed bottom-4 right-20 p-2 bg-purple-500 text-black text-xl rounded-full shadow-lg w-12 h-12 flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity duration-300"
+        className="z-10 fixed bottom-4 right-20 p-2 bg-purple-500 text-black text-xl rounded-full shadow-lg w-12 h-12 flex items-center justify-center opacity-50 hover:opacity-100 duration-300"
       >
         ^
       </button>
@@ -78,14 +78,21 @@ const CoinList: React.FC = () => {
               <span className="ml-6 w-10">{crypto.market_cap_rank}</span>
               <span className="w-48">
                 <span className="w-36 flex items-center">
-                  <img className="w-7 mr-3" src={crypto.image} alt={"img"} />
-                  <span>{crypto.name}</span>
+                  <img className="w-7 mr-2" src={crypto.image} alt={"img"} />
+                  <span className="mr-2">{crypto.name}</span>
+                  <span>{crypto.symbol}</span>
                 </span>
               </span>
               <span className="w-36">${crypto.current_price.toLocaleString()}</span>
-              <span className="w-28">{crypto.price_change_percentage_1h_in_currency.toFixed(1)}%</span>
-              <span className="w-28">{crypto.price_change_percentage_24h_in_currency.toFixed(1)}%</span>
-              <span className="w-32">{crypto.price_change_percentage_7d_in_currency.toFixed(1)}%</span>
+              <span className={`w-28 ${crypto.price_change_percentage_1h_in_currency_class}`}>
+                {crypto.price_change_percentage_1h_in_currency}%
+              </span>
+              <span className={`w-28 ${crypto.price_change_percentage_24h_in_currency_class}`}>
+                {crypto.price_change_percentage_24h_in_currency}%
+              </span>
+              <span className={`w-32 ${crypto.price_change_percentage_7d_in_currency_class}`}>
+                {crypto.price_change_percentage_7d_in_currency}%
+              </span>
               <span className="w-32">${crypto.market_cap}</span>
               <span className="w-40">${crypto.total_volume}</span>
               <div className="w-52">

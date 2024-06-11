@@ -25,7 +25,7 @@ const CoinSearchInput: React.FC = () => {
   };
 
   const handleBlur = () => {
-    setTimeout(() => setIsFocused(false), 100);
+    setTimeout(() => setIsFocused(false), 200);
   };
 
   if (error) {
@@ -44,9 +44,9 @@ const CoinSearchInput: React.FC = () => {
         className="w-full px-4 py-2 bg-gray-200 bg-opacity-10 backdrop-blur-md text-white rounded-md focus:outline-none transition duration-200 ease-in-out hover:bg-opacity-20"
       />
       {isFocused && searchResults.length > 0 && (
-        <ul className="absolute mt-2 w-full bg-white border border-gray-300 rounded-md shadow-sm">
+        <ul className="absolute mt-2 w-full bg-gray-600 bg-opacity-90 backdrop-blur-md rounded-md">
           {searchResults.map((coin) => (
-            <li key={coin.id} className="flex items-center py-2 px-4 cursor-pointer hover:bg-gray-100">
+            <li key={coin.id} className="flex items-center py-2 px-4 cursor-pointer hover:bg-gray-400 rounded-md">
               <Link href={`/${coin.id}`} className="flex items-center w-full h-full">
                 <Image src={coin.large || coin.thumb || coin.image} alt={coin.name} width={32} height={32} />
                 <span className="ml-2 text-black">{coin.symbol.toUpperCase()}</span>
