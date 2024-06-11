@@ -6,9 +6,12 @@ export interface CoinData {
   thumb: string;
   name: string;
   current_price: number;
-  price_change_percentage_1h_in_currency: number;
-  price_change_percentage_24h_in_currency: number;
-  price_change_percentage_7d_in_currency: number;
+  price_change_percentage_1h_in_currency: any; // Allow both number and string
+  price_change_percentage_24h_in_currency: any; // Allow both number and string
+  price_change_percentage_7d_in_currency: any; // Allow both number and string
+  price_change_percentage_1h_in_currency_class: string; // Keep as string for class names
+  price_change_percentage_24h_in_currency_class: string; // Keep as string for class names
+  price_change_percentage_7d_in_currency_class: string;
   total_volume: any;
   circulating_supply: any;
   total_supply: any;

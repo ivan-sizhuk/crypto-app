@@ -49,14 +49,10 @@ const Carousel: React.FC = () => {
                 <Image src={crypto.image} alt={crypto.name} layout="fill" objectFit="contain" />
               </div>
               <div className="ml-2">
-                <span className="text-sm font-medium">{crypto.name}</span>
-                <span className="text-xs block">${crypto.current_price.toLocaleString()}</span>
-                <span
-                  className={`text-xs ${
-                    crypto.price_change_percentage_1h_in_currency > 0 ? "text-green-500" : "text-red-500"
-                  }`}
-                >
-                  {crypto.price_change_percentage_1h_in_currency.toFixed(1)}%
+                <span className="text-sm font-medium">{crypto.symbol}</span>
+                <span className="text-sm block">${crypto.current_price}</span>
+                <span className={`text-sm ${crypto.price_change_percentage_1h_in_currency_class}`}>
+                  {crypto.price_change_percentage_1h_in_currency}%
                 </span>
               </div>
             </div>
