@@ -1,70 +1,36 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
-import { useAppDispatch, useAppSelector } from "../../lib/hooks";
-import { fetchCoinData } from "../../lib/slices/coinListSlice";
-import { CoinData } from "../../utilities/CoinDataInterface";
+import React, { useState, useEffect } from "react";
+import { useCoinSearch } from "../../lib/useCoinSearch";
+import Image from "next/image";
 
-const CoinDropdown: React.FC = () => {
-  const dispatch = useAppDispatch();
+interface CoinDropdownProps {
+  defaultCoin: { symbol: string; image: string };
+}
+
+const CoinDropdown: React.FC<CoinDropdownProps> = ({ defaultCoin }) => {
+  const { searchTerm, setSearchTerm, searchResults, setSearchResults, cryptoData, error } = useCoinSearch();
   const [isOpen, setIsOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState<CoinData[]>([]);
-  const { cryptoData, error } = useAppSelector((state) => state.coinData);
-  const [selectedCoin, setSelectedCoin] = useState<{ symbol: string; image: string } | null>(null);
-  const searchTimeout = useRef<NodeJS.Timeout | null>(null);
-
-  useEffect(() => {
-    dispatch(fetchCoinData());
-  }, [dispatch]);
+  const [selectedCoin, setSelectedCoin] = useState<{ symbol: string; image: string } | null>(defaultCoin);
 
   useEffect(() => {
     if (cryptoData.length > 0) {
-      setSelectedCoin({
-        symbol: cryptoData[0].symbol,
-        image: cryptoData[0].image,
-      });
-      setSearchResults(cryptoData.slice(0, 5));
-    }
-  }, [cryptoData]);
-
-  useEffect(() => {
-    if (searchTerm.trim() !== "") {
-      if (searchTimeout.current) {
-        clearTimeout(searchTimeout.current);
+      const defaultSelectedCoin = cryptoData.find((coin) => coin.symbol === defaultCoin.symbol);
+      if (defaultSelectedCoin) {
+        setSelectedCoin({ symbol: defaultSelectedCoin.symbol, image: defaultSelectedCoin.image });
       }
-      searchTimeout.current = setTimeout(() => {
-        fetchSearchResults(searchTerm.trim());
-      }, 2000);
-    } else {
-      setSearchResults(cryptoData.slice(0, 5));
     }
-
-    return () => {
-      if (searchTimeout.current) {
-        clearTimeout(searchTimeout.current);
-      }
-    };
-  }, [searchTerm, cryptoData]);
+  }, [cryptoData, defaultCoin]);
 
   if (error) {
     return <div>Error: {error}</div>;
   }
 
-  const fetchSearchResults = async (term: string) => {
-    try {
-      const response = await fetch(`https://api.coingecko.com/api/v3/search?query=${term}`);
-      if (!response.ok) {
-        throw new Error("Failed to fetch search results");
-      }
-      const data = await response.json();
-      setSearchResults(data.coins.slice(0, 5));
-    } catch (error) {
-      console.error("Error searching coins:", error);
-    }
-  };
-
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
+    if (!isOpen) {
+      // Set the first 5 coins as the initial search results when opening the dropdown
+      setSearchResults(cryptoData.slice(0, 5));
+    }
   };
 
   const handleOptionClick = (symbol: string, image: string) => {
@@ -73,7 +39,12 @@ const CoinDropdown: React.FC = () => {
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
+    const value = e.target.value;
+    setSearchTerm(value);
+
+    if (value.trim() === "") {
+      setSearchResults(cryptoData.slice(0, 5));
+    }
   };
 
   return (
@@ -81,7 +52,7 @@ const CoinDropdown: React.FC = () => {
       <button onClick={toggleDropdown} className="flex items-center w-32">
         {selectedCoin ? (
           <>
-            <img className="w-8 h-8" src={selectedCoin.image} alt={selectedCoin.symbol} />
+            <Image src={selectedCoin.image} alt={selectedCoin.symbol} width={32} height={32} />
             <span className="ml-2">{selectedCoin.symbol.toUpperCase()}</span>
           </>
         ) : (
@@ -101,10 +72,10 @@ const CoinDropdown: React.FC = () => {
             {searchResults.map((coin) => (
               <li
                 key={coin.id}
-                onClick={() => handleOptionClick(coin.symbol, coin.image || coin.thumb)}
+                onClick={() => handleOptionClick(coin.symbol, coin.large || coin.image || coin.thumb)}
                 className="flex items-center py-2 px-4 cursor-pointer hover:bg-gray-100"
               >
-                <img className="w-8 h-8" src={coin.image || coin.thumb} alt={coin.name} />
+                <Image src={coin.large || coin.image || coin.thumb} alt={coin.name} width={32} height={32} />
                 <span className="ml-2">{coin.symbol.toUpperCase()}</span>
               </li>
             ))}

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../lib/hooks";
 import { fetchCoinData } from "../../lib/slices/coinListSlice";
+import SevenDayChart from "./sevenDayChart";
 import Link from "next/link";
 
 const CoinList: React.FC = () => {
@@ -105,7 +106,9 @@ const CoinList: React.FC = () => {
                   ></div>
                 </div>
               </div>
-              <span className="flex justify-end w-36 mr-6">Coming Soon...</span>
+              <div className="flex justify-end items-center w-36 h-1 mr-6">
+                <SevenDayChart data={[1, 1, 3, 0, 4, 6, 5]} />
+              </div>
             </li>
           </Link>
         ))}
