@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../lib/hooks";
 import { fetchCoinData } from "../../lib/slices/coinListSlice";
 import SevenDayChart from "./sevenDayChart";
 import Link from "next/link";
+import Image from "next/image";
 
 const CoinList: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -78,19 +79,39 @@ const CoinList: React.FC = () => {
               <span className="ml-6 w-10">{crypto.market_cap_rank}</span>
               <span className="w-48">
                 <span className="w-36 flex items-center">
-                  <img className="w-7 mr-2" src={crypto.image} alt={"img"} />
+                  <div className="relative w-7 h-7 mr-2">
+                    <Image src={crypto.image} alt={"img"} layout="fill" objectFit="contain" />
+                  </div>
                   <span className="mr-2">{crypto.name}</span>
                   <span>{crypto.symbol}</span>
                 </span>
               </span>
               <span className="w-36">${crypto.current_price.toLocaleString()}</span>
-              <span className={`w-28 ${crypto.price_change_percentage_1h_in_currency_class}`}>
+              <span
+                className={`w-28 ${
+                  crypto.price_change_percentage_1h_in_currency > 0
+                    ? "text-green-500 !important"
+                    : "text-red-500 !important"
+                }`}
+              >
                 {crypto.price_change_percentage_1h_in_currency}%
               </span>
-              <span className={`w-28 ${crypto.price_change_percentage_24h_in_currency_class}`}>
+              <span
+                className={`w-28 ${
+                  crypto.price_change_percentage_24h_in_currency > 0
+                    ? "text-green-500 !important"
+                    : "text-red-500 !important"
+                }`}
+              >
                 {crypto.price_change_percentage_24h_in_currency}%
               </span>
-              <span className={`w-32 ${crypto.price_change_percentage_7d_in_currency_class}`}>
+              <span
+                className={`w-32 ${
+                  crypto.price_change_percentage_7d_in_currency > 0
+                    ? "text-green-500 !important"
+                    : "text-red-500 !important"
+                }`}
+              >
                 {crypto.price_change_percentage_7d_in_currency}%
               </span>
               <span className="w-32">${crypto.market_cap}</span>

@@ -19,10 +19,6 @@ export const formatNumber = (num: any) => {
   }
 };
 
-const formatPercentageChangeClass = (value: number) => {
-  return value > 0 ? "text-green-500" : "text-red-500";
-};
-
 export const fetchCoinData = createAsyncThunk<CoinData[], number | undefined>(
   "coinData/fetchCoinData",
   async (perPage, thunkAPI) => {
@@ -37,10 +33,6 @@ export const fetchCoinData = createAsyncThunk<CoinData[], number | undefined>(
 
       const data: CoinData[] = await response.json();
       const updatedData = data.map((coin) => {
-        const class1h = formatPercentageChangeClass(coin.price_change_percentage_1h_in_currency);
-        const class24h = formatPercentageChangeClass(coin.price_change_percentage_24h_in_currency);
-        const class7d = formatPercentageChangeClass(coin.price_change_percentage_7d_in_currency);
-
         return {
           ...coin,
           market_cap: formatNumber(coin.market_cap),
@@ -48,11 +40,8 @@ export const fetchCoinData = createAsyncThunk<CoinData[], number | undefined>(
           circulating_supply: formatNumber(parseFloat(coin.circulating_supply)),
           total_supply: formatNumber(parseFloat(coin.total_supply)),
           symbol: coin.symbol.toUpperCase(),
-          price_change_percentage_1h_in_currency_class: class1h,
           price_change_percentage_1h_in_currency: coin.price_change_percentage_1h_in_currency.toFixed(1),
-          price_change_percentage_24h_in_currency_class: class24h,
           price_change_percentage_24h_in_currency: coin.price_change_percentage_24h_in_currency.toFixed(1),
-          price_change_percentage_7d_in_currency_class: class7d,
           price_change_percentage_7d_in_currency: coin.price_change_percentage_7d_in_currency.toFixed(1),
         };
       });
