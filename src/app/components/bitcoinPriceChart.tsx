@@ -14,14 +14,12 @@ const BitcoinPriceChart: React.FC = () => {
     dispatch(fetchBitcoinChartData());
   }, [dispatch]);
 
-  const borderColor = prices[0] <= prices[prices.length - 1] ? "green" : "red";
-
   const chartData = {
     labels: new Array(prices.length).fill(""),
     datasets: [
       {
         data: prices,
-        borderColor,
+        borderColor: "#9f7aea",
         fill: false,
         tension: 0.1,
         pointRadius: 0,

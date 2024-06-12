@@ -46,7 +46,12 @@ const Carousel: React.FC = () => {
           <Link href="/[coinId]" as={`/${crypto.id}`} key={crypto.id}>
             <div className="container min-w-[10rem] h-20 flex items-center p-2">
               <div className="relative w-10 h-10 mb-2">
-                <Image src={crypto.image} alt={crypto.name} layout="fill" objectFit="contain" />
+                <Image
+                  src={typeof crypto.image === "string" ? crypto.image : crypto.image.large}
+                  alt={crypto.name}
+                  layout="fill"
+                  objectFit="contain"
+                />
               </div>
               <div className="ml-2">
                 <span className="text-sm font-medium">{crypto.symbol}</span>
