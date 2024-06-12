@@ -82,6 +82,7 @@ const CoinList: React.FC = () => {
               <span className="w-48">
                 <span className="w-36 flex items-center">
                   <div className="relative w-7 h-7 mr-2">
+                    {/* eslint-disable-next-line */}
                     <Image
                       src={typeof crypto.image === "string" ? crypto.image : crypto.image.large}
                       alt={crypto.name}

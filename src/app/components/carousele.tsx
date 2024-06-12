@@ -46,6 +46,7 @@ const Carousel: React.FC = () => {
           <Link href="/[coinId]" as={`/${crypto.id}`} key={crypto.id}>
             <div className="container min-w-[10rem] h-20 flex items-center p-2">
               <div className="relative w-10 h-10 mb-2">
+                {/* eslint-disable-next-line */}
                 <Image
                   src={typeof crypto.image === "string" ? crypto.image : crypto.image.large}
                   alt={crypto.name}
