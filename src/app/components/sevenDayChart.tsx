@@ -19,6 +19,9 @@ const SevenDayChart: React.FC<SevenDayChartProps> = ({ data }) => {
         borderColor,
         fill: false,
         tension: 0.1,
+        pointRadius: 0,
+        pointHoverRadius: 0,
+        borderWidth: 2,
       },
     ],
   };

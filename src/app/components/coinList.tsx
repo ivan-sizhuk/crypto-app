@@ -15,22 +15,24 @@ const CoinList: React.FC = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    const currentContainerRef = containerRef.current;
+
     const handleScroll = () => {
-      if (containerRef.current) {
-        const { scrollTop, clientHeight, scrollHeight } = containerRef.current;
+      if (currentContainerRef) {
+        const { scrollTop, clientHeight, scrollHeight } = currentContainerRef;
         if (scrollTop + clientHeight >= scrollHeight && !loading) {
           dispatch(fetchCoinData(cryptoData.length + 10));
         }
       }
     };
 
-    if (containerRef.current) {
-      containerRef.current.addEventListener("scroll", handleScroll);
+    if (currentContainerRef) {
+      currentContainerRef.addEventListener("scroll", handleScroll);
     }
 
     return () => {
-      if (containerRef.current) {
-        containerRef.current.removeEventListener("scroll", handleScroll);
+      if (currentContainerRef) {
+        currentContainerRef.removeEventListener("scroll", handleScroll);
       }
     };
   }, [dispatch, cryptoData, loading]);
@@ -135,7 +137,7 @@ const CoinList: React.FC = () => {
                 </div>
               </div>
               <div className="flex justify-end items-center w-36 h-1 mr-6">
-                <SevenDayChart data={[1, 1, 3, 0, 4, 6, 5]} />
+                <SevenDayChart data={crypto.sparkline_in_7d.price} />
               </div>
             </li>
           </Link>

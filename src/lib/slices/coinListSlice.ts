@@ -24,7 +24,7 @@ export const fetchCoinData = createAsyncThunk<CoinData[], number | undefined>(
   async (perPage, thunkAPI) => {
     try {
       const response = await fetch(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${perPage}&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d&x_cg_demo_api_key=CG-ngyTBAk7Rz4RzH3a3JZW63Zo`
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${perPage}&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d&x_cg_demo_api_key=CG-ngyTBAk7Rz4RzH3a3JZW63Zo`
       );
 
       if (!response.ok) {

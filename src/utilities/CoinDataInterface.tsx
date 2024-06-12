@@ -14,6 +14,9 @@ export interface CoinData {
   total_supply: any;
   market_cap_rank: any;
   market_cap: any;
+  sparkline_in_7d: {
+    price: number[];
+  };
   description: {
     en: string;
   };
