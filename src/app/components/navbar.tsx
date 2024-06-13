@@ -5,10 +5,9 @@ export default function Navbar() {
   return (
     <nav className="px-8 flex items-center justify-between w-full py-4 fixed top-0 bg-gray-800 bg-opacity-10 backdrop-blur-md z-20">
       {/* Logo */}
-      <div className="hidden md:flex text-4xl text-purple-500">
+      <div className="hidden md:flex text-4xl text-purple-500 hover:text-gray-200 transition duration-200 ease-in-out hover:shadow-neon">
         <a href="/">{"cryptico."}</a>
       </div>
-
       {/* Links */}
       <div className="md:flex space-x-6 pl-6 pr-3">
         <Link legacyBehavior href="/exchange">

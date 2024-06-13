@@ -3,6 +3,7 @@ import { Line } from "react-chartjs-2";
 import { useAppDispatch, useAppSelector } from "../../lib/hooks";
 import { fetchBitcoinChartData } from "../../lib/slices/bitcoinChartSlice";
 import { Chart as ChartJS, LineElement, LinearScale, CategoryScale, PointElement } from "chart.js";
+import LoadingSpinner from "./loadingSpinner";
 
 ChartJS.register(LineElement, LinearScale, CategoryScale, PointElement);
 
@@ -48,8 +49,8 @@ const BitcoinPriceChart: React.FC = () => {
   };
 
   return (
-    <div style={{ width: "100%", height: "100%", minHeight: "300px", minWidth: "100%" }}>
-      {loading && <p>Loading...</p>}
+    <div className="w-full h-full min-h-[300px] min-w-full">
+      {loading && <LoadingSpinner />}
       {error && <p>Error: {error}</p>}
       {!loading && !error && <Line data={chartData} options={chartOptions} />}
     </div>
