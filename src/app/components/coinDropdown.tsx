@@ -14,9 +14,13 @@ const CoinDropdown: React.FC<CoinDropdownProps> = ({ defaultCoin }) => {
 
   useEffect(() => {
     if (cryptoData.length > 0) {
+      const defaultCoin = { symbol: "" };
       const defaultSelectedCoin = cryptoData.find((coin) => coin.symbol === defaultCoin.symbol);
       if (defaultSelectedCoin) {
-        setSelectedCoin({ symbol: defaultSelectedCoin.symbol, image: defaultSelectedCoin.image });
+        setSelectedCoin({
+          symbol: defaultSelectedCoin.symbol,
+          image: defaultSelectedCoin.image.large,
+        });
       }
     }
   }, [cryptoData, defaultCoin]);
