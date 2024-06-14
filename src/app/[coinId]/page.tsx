@@ -35,7 +35,7 @@ const Coin: React.FC = () => {
   return (
     <div className="px-8">
       <div className="flex h-72 gap-5">
-        <div className="container flex flex-col justify-around w-3/5 py-4 px-8">
+        <div className="container-no-hover flex flex-col justify-around w-3/5 py-4 px-8">
           <div className="flex justify-center items-center w-24 h-24">
             {selectedCoinData?.image?.large && (
               <Image src={selectedCoinData.image.large} alt={selectedCoinData.name} width={200} height={200} />
@@ -44,7 +44,7 @@ const Coin: React.FC = () => {
           <p className="text-3xl">{selectedCoinData.name}</p>
           <a href={selectedCoinData.links.homepage}>{selectedCoinData.links.homepage}</a>
         </div>
-        <div className="container w-3/5 flex flex-col justify-around py-4 px-8">
+        <div className="container-no-hover w-3/5 flex flex-col justify-around py-4 px-8">
           <p className="text-3xl">${selectedCoinData.market_data.current_price.usd}</p>
           <p>{selectedCoinData.market_data.price_change_percentage_24h}</p>
           <FontAwesomeIcon className="h-8 w-8" icon={faLayerGroup} />
@@ -97,7 +97,7 @@ const Coin: React.FC = () => {
       </div>
       <div className="mt-8">
         <p>Description:</p>
-        <div className="container flex min-w-full p-8">{selectedCoinData.description.en}</div>
+        <div className="container-no-hover flex min-w-full p-8">{selectedCoinData.description.en}</div>
       </div>
       {/* <div>
         <div className="flex gap-5 mt-8">

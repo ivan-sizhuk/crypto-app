@@ -18,15 +18,25 @@ const config: Config = {
       addComponents({
         ".container": {
           backgroundColor: "#2b3139", // bg-indigo-950
-          "&:hover": {
-            backgroundColor: "#5E6673", // hover:bg-indigo-900
-          },
-          transition: "background-color 0.2s ease-in-out",
+          transition: "border-color 0.01s ease-in-out, box-shadow 0.2s ease-in-out",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           borderRadius: "1rem",
           cursor: "pointer",
+          border: "2px solid transparent",
+          "&:hover": {
+            boxShadow: "inset 0 0 1px #edf8ff, inset 0 0 1px #edf8ff, inset 0 0 10px #edf8ff", // inset glow effect
+          },
+        },
+        ".container-no-hover": {
+          backgroundColor: "#2b3139", // bg-indigo-950
+          transition: "border-color 0.01s ease-in-out, box-shadow 0.2s ease-in-out",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          borderRadius: "1rem",
+          border: "2px solid transparent",
         },
       });
     },

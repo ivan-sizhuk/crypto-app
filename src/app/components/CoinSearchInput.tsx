@@ -26,6 +26,7 @@ const CoinSearchInput: React.FC = () => {
 
   const handleBlur = () => {
     setTimeout(() => setIsFocused(false), 200);
+    setSearchTerm("");
   };
 
   if (error) {

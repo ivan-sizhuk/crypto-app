@@ -3,6 +3,7 @@ import { Bar } from "react-chartjs-2";
 import { useAppDispatch, useAppSelector } from "../../lib/hooks";
 import { fetchBitcoinChartData } from "../../lib/slices/bitcoinChartSlice";
 import { Chart as ChartJS, BarElement, LinearScale, CategoryScale } from "chart.js";
+import LoadingSpinner from "./loadingSpinner";
 
 ChartJS.register(BarElement, LinearScale, CategoryScale);
 
@@ -46,7 +47,7 @@ const BitcoinVolumeChart: React.FC = () => {
 
   return (
     <div style={{ width: "100%", height: "100%", minHeight: "300px", minWidth: "100%" }}>
-      {loading && <p>Loading...</p>}
+      {loading && <LoadingSpinner />}
       {error && <p>Error: {error}</p>}
       {!loading && !error && <Bar data={chartData} options={chartOptions} />}
     </div>

@@ -45,7 +45,7 @@ const SevenDayChart: React.FC<SevenDayChartProps> = ({ data }) => {
   };
 
   return (
-    <div style={{ width: "100%", height: "100%", minHeight: "50px", minWidth: "100px" }}>
+    <div className="w-ful h-full min-h-[50px] min-w-[100px]">
       <Line data={chartData} options={chartOptions} />
     </div>
   );

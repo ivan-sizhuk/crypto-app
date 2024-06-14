@@ -9,10 +9,10 @@ const Home = () => {
     <div className="px-8">
       <Carousel />
       <div className="flex mt-12">
-        <div className="container w-1/2 h-72 mr-4">
+        <div className="container-no-hover flex items-center justify-center w-1/2 h-72 mr-4">
           <BitcoinPriceChart />
         </div>
-        <div className="container w-1/2 h-72 ml-4 overflow-hidden">
+        <div className="container-no-hover flex items-center justify-center w-1/2 h-72 ml-4 overflow-hidden">
           <BitcoinVolumeChart />
         </div>
       </div>
