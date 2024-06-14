@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLayerGroup, faCircle } from "@fortawesome/free-solid-svg-icons";
 import { usePathname } from "next/navigation";
 import { CoinData } from "@/utilities/CoinDataInterface";
+import Image from "next/image";
 
 const Coin: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -29,13 +30,16 @@ const Coin: React.FC = () => {
     return <div>Error: {error}</div>;
   }
 
+  console.log(selectedCoinData);
+
   return (
     <div className="px-8">
       <div className="flex h-72 gap-5">
         <div className="container flex flex-col justify-around w-3/5 py-4 px-8">
           <div className="flex justify-center items-center w-24 h-24">
-            {/*  @ts-ignore */}
-            <img src={selectedCoinData.image.large} alt="" />
+            {selectedCoinData?.image?.large && (
+              <Image src={selectedCoinData.image.large} alt={selectedCoinData.name} width={200} height={200} />
+            )}
           </div>
           <p className="text-3xl">{selectedCoinData.name}</p>
           <a href={selectedCoinData.links.homepage}>{selectedCoinData.links.homepage}</a>

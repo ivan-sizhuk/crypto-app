@@ -1,9 +1,9 @@
 export interface CoinData {
   id: string;
   symbol: string;
-  large: string;
-  image: string;
-  thumb: string;
+  large: string | any;
+  thumb: string | any;
+  image: { large: string; thumb: string };
   name: string;
   current_price: number;
   price_change_percentage_1h_in_currency: number;
