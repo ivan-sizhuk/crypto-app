@@ -37,7 +37,7 @@ const Coin: React.FC = () => {
       <div className="flex h-72 gap-5">
         <div className="container flex flex-col justify-around w-3/5 py-4 px-8">
           <div className="flex justify-center items-center w-24 h-24">
-            {selectedCoinData && selectedCoinData.image && selectedCoinData.image.large && (
+            {selectedCoinData?.image?.large && (
               <Image src={selectedCoinData.image.large} alt={selectedCoinData.name} width={200} height={200} />
             )}
           </div>
